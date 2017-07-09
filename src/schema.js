@@ -4,7 +4,7 @@
 // 2. the entry point to graphql API (Query)
 
 //http://graphql.org/learn/schema/#scalar-types
-const typeDefs = `
+export const typeDefs = `
 
 type Channel {
     id: ID!
