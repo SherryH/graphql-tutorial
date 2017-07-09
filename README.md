@@ -2,6 +2,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This project is used to follow along this [graphql-tutorial](https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b?_ga=2.125189133.681835150.1499139640-648276673.1499139640#.cwvxzphyc)
 
+## Tutorial Learning Key Points
+### Tutorial 1
+- Define data type schema and query schema
+- Create mock server with the schema
+- Write gql query
+- Create higher order component that accepts props.data from query
+- Use `Apollo Provider` and `Apollo Client` to connect all above together
+
 
 
 
