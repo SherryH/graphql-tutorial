@@ -20,6 +20,15 @@ const networkInterface = createNetworkInterface({
   uri: 'http://localhost:4000/graphql'
 });
 
+//added 500ms latency to simlate slow network
+//use middleware to create latency - http://dev.apollodata.com/core/network.html
+networkInterface.use([{
+  applyMiddleware(req, next){
+    setTimeout(next, 500);
+    // next(); // next is executed 500ms later
+  }
+}]);
+
 const client = new ApolloClient({
   networkInterface
 });
