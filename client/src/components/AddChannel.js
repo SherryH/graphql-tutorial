@@ -3,6 +3,8 @@ import { gql, graphql } from 'react-apollo';
 import { channelsListQuery } from './ChannelsListWithData';
 
 // Define component
+// instead of using refetch refetchQueries: [{ query: channelsListQuery }]
+//use update to read updated data from cache
 const AddChannel = ({ mutate }) => {
   const handleKeyDown = e => {
     if (e.keyCode === 13) {
@@ -10,7 +12,10 @@ const AddChannel = ({ mutate }) => {
       e.persist();
       mutate({
         variables: { name: e.target.value },
-        refetchQueries: [{ query: channelsListQuery }]
+        update: (proxy, { data: { addChannel } }) => {
+          //read data from our cache using channelsListQuery
+          const data = proxy.readQuery({ query: channelsListQuery });
+        }
       });
       e.target.value = '';
     }
