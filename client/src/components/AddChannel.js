@@ -15,6 +15,9 @@ const AddChannel = ({ mutate }) => {
         update: (proxy, { data: { addChannel } }) => {
           //read data from our cache using channelsListQuery
           const data = proxy.readQuery({ query: channelsListQuery });
+          //add mutation data to the read data
+          //the data read from query is saved in the 'data' obj
+          data.channels.push(addChannel);
         }
       });
       e.target.value = '';
