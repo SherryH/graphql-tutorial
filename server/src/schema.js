@@ -16,7 +16,7 @@ type Message {
 
 # Define Input Type. Mutation Input param might be the same across few operations like Create/ Update
 
-Input MessageInput {
+input MessageInput {
   channelId: ID
   text: String
 }

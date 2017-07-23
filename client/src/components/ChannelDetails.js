@@ -5,7 +5,7 @@ import NotFound from './NotFound';
 
 import { gql, graphql } from 'react-apollo';
 
-export const ChannelDetailsQuery = gql`
+export const channelDetailsQuery = gql`
   query ChannelDetailsQuery($channelId: ID!) {
     channel(id: $channelId) {
       id
@@ -18,16 +18,15 @@ export const ChannelDetailsQuery = gql`
   }
 `;
 
-//data loading, error, message and channel list
-
 //the channel details view should display name and messages
 const ChannelDetails = ({ data: { loading, error, channel } }) => {
-  let messages = [{ id: '1', text: 'Stub Message - To Replace' }];
-  let name = 'Stub Name';
+  // let messages = [{ id: '1', text: 'Stub Message - To Replace' }];
+  // let name = 'Stub Name';
   // let channel = { name, messages };
+  console.log('channel', channel);
 
   if (loading) {
-    return <p>Loading</p>;
+    return <ChannelPreview />;
   }
   if (error) {
     return <p>Error</p>;
@@ -45,7 +44,6 @@ const ChannelDetails = ({ data: { loading, error, channel } }) => {
     </div>
   );
 };
-const props = ChannelDetails.props;
-export default graphql(ChannelDetailsQuery, {
+export default graphql(channelDetailsQuery, {
   options: props => ({ variables: { channelId: props.match.params.channelId } })
 })(ChannelDetails);

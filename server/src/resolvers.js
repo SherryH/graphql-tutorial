@@ -49,6 +49,19 @@ export const resolvers = {
       };
       channels.push(newChannel);
       return newChannel;
+    },
+    addMessage: (root, { message }) => {
+      //args = {message}; //because the input arg is a message of type MessageInput
+      const currentChannel = channels.find(
+        channel => channel.id === message.channelId
+      );
+      if (!currentChannel) throw new Error('Channel does not exist');
+      const currentMessage = {
+        id: String(nextMessageId++),
+        text: message.text
+      };
+      currentChannel.messages.push(currentMessage);
+      return currentMessage;
     }
   }
 };
