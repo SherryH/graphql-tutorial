@@ -1,18 +1,11 @@
-//graphql type definition
-//speficies 
-// 1. the object types and fields in the App
-// 2. the entry point to graphql API (Query)
-
-//http://graphql.org/learn/schema/#scalar-types
 export const typeDefs = `
 
 type Channel {
-    id: ID!
-    name: String
+  id: ID!
+  name: String
 }
 
 type Query {
-    channels: [Channel] 
+  channels: [Channel]
 }
-
 `;

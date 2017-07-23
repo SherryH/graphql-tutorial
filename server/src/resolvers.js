@@ -1,31 +1,50 @@
-//hardcode some data for now
 const channels = [
   {
-    id: 0,
-    name: 'soccer'
+    id: '1',
+    name: 'soccer',
+    messages: [
+      {
+        id: '1',
+        text: 'soccer is football'
+      },
+      {
+        id: '2',
+        text: 'hello soccer world cup'
+      }
+    ]
   },
   {
-    id: 1,
-    name: 'baseball'
+    id: '2',
+    name: 'baseball',
+    messages: [
+      {
+        id: '3',
+        text: 'baseball is life'
+      },
+      {
+        id: '4',
+        text: 'hello baseball world series'
+      }
+    ]
   }
 ];
+let nextId = 3;
+let nextMessageId = 5;
 
-//resolvers grouped in an object
-// Query resolver for resolving incoming queries
-//similar structure to our data schema. this will be used in schema.js
-// Resolver doc:
-// http://dev.apollodata.com/tools/graphql-tools/resolvers.html
-let channelId = 2;
 export const resolvers = {
   Query: {
     channels: () => {
       return channels;
+    },
+    channel: (root, { id }) => {
+      return channels.find(channel => channel.id === id);
     }
   },
   Mutation: {
     addChannel: (root, args) => {
       const newChannel = {
-        id: channelId++,
+        id: String(nextId++),
+        messages: [],
         name: args.name
       };
       channels.push(newChannel);

@@ -1,31 +1,38 @@
 import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
+
 import { resolvers } from './resolvers';
 
-// "!" denotes a required field
-// "[]" means this is a list of channels
-// # A mutation to add a new channel to the list of channels
 const typeDefs = `
-
 type Channel {
-    id: ID!
-    name: String
+  id: ID!                # "!" denotes a required field
+  name: String
+  messages: [Message]!
 }
 
+type Message {
+  id: ID
+  text: String
+}
+
+# Define Input Type. Mutation Input param might be the same across few operations like Create/ Update
+
+Input MessageInput {
+  channelId: ID
+  text: String
+}
+
+# This type specifies the entry points into our API
 type Query {
-    channels: [Channel]
+  channels: [Channel]    # "[]" means this is a list of channels
+  channel(id: ID!): Channel
 }
 
+# The mutation root type, used to define all mutations
 type Mutation {
-    addChannel(name: String!): Channel
+  addChannel(name: String!): Channel
+  addMessage(message: MessageInput!): Message
 }
-
 `;
-//turns data types into executable schema for graphql server
-const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers
-});
-// Add mocks, modifies schema in place
-// addMockFunctionsToSchema({ schema });
 
+const schema = makeExecutableSchema({ typeDefs, resolvers });
 export { schema };
