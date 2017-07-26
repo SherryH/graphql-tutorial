@@ -1,20 +1,26 @@
 import React from 'react';
-import {
-    gql,
-    graphql,
-} from 'react-apollo';
+import { gql, graphql } from 'react-apollo';
 
-
-const ChannelPreview = () => {
-
-  let channel = { name: "Stub Name"}
+const ChannelPreview = ({ data: { loading, error, channel } }) => {
+  //let channel = { name: "Stub Name"}
 
   return (
-    <div className="channelName">
-      {channel.name}
+    <div>
+      <div className="channelName">
+        {channel ? channel.name : loading}
+      </div>
+      <div>Loading Messages</div>
     </div>
   );
 };
 
+const channelQuery = gql`
+  query ChannelQuery($channelId: ID!) {
+    channel(id: $channelID) {
+      id
+      name
+    }
+  }
+`;
 
-export default (ChannelPreview);
+export default ChannelPreview;
