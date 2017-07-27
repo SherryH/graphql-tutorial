@@ -23,4 +23,10 @@ const channelQuery = gql`
   }
 `;
 
-export default ChannelPreview;
+export default graphql(channelQuery, {
+  options: ({ channelId }) => ({
+    variables: {
+      channelId
+    }
+  })
+})(ChannelPreview);
