@@ -26,7 +26,7 @@ const ChannelDetails = ({ data: { loading, error, channel } }) => {
   console.log('channel', channel);
 
   if (loading) {
-    return <ChannelPreview />;
+    return <ChannelPreview channelId={channel.id} />;
   }
   if (error) {
     return <p>Error</p>;
