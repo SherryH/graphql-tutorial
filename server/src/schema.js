@@ -9,15 +9,13 @@ type Channel {
   messages: [Message]!
 }
 
-type Message {
-  id: ID
+input MessageInput{
+  channelId: ID!
   text: String
 }
 
-# Define Input Type. Mutation Input param might be the same across few operations like Create/ Update
-
-input MessageInput {
-  channelId: ID
+type Message {
+  id: ID!
   text: String
 }
 
@@ -32,6 +30,11 @@ type Mutation {
   addChannel(name: String!): Channel
   addMessage(message: MessageInput!): Message
 }
+
+type Subscription {
+  messageAdded(channelId: ID!): Message
+}
+
 `;
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
