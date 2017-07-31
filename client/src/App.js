@@ -36,11 +36,9 @@ function dataIdFromObject(result) {
 const client = new ApolloClient({
   networkInterface,
   customResolvers: {
-    channel: (_, args) => {
-      console.log('customResolver', args);
-      return toIdValue(
-        dataIdFromObject({ __typename: 'Channel', id: args['id'] })
-      );
+    Query: {
+      channel: (_, args) =>
+        toIdValue(dataIdFromObject({ __typename: 'Channel', id: args['id'] }))
     }
   },
   dataIdFromObject

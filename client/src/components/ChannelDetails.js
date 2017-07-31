@@ -19,14 +19,14 @@ export const channelDetailsQuery = gql`
 `;
 
 //the channel details view should display name and messages
-const ChannelDetails = ({ data: { loading, error, channel } }) => {
+const ChannelDetails = ({ data: { loading, error, channel }, match }) => {
   // let messages = [{ id: '1', text: 'Stub Message - To Replace' }];
   // let name = 'Stub Name';
   // let channel = { name, messages };
-  console.log('channel', channel);
+  console.log('channel', match.params.channelId);
 
   if (loading) {
-    return <ChannelPreview channelId={channel.id} />;
+    return <ChannelPreview channelId={match.params.channelId} />;
   }
   if (error) {
     return <p>Error</p>;
